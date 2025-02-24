@@ -6,6 +6,8 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.reflection.ReflectionConfig;
 import com.acmerobotics.roadrunner.MotorFeedforward;
 import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.PoseVelocity2d;
+import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.AngularRampLogger;
 import com.acmerobotics.roadrunner.ftc.DeadWheelDirectionDebugger;
 import com.acmerobotics.roadrunner.ftc.DriveType;
@@ -69,27 +71,48 @@ public final class TuningOpModes {
 
     private static PinpointView makePinpointView(PinpointLocalizer pl) {
         return new PinpointView() {
+            PoseVelocity2d vel = new PoseVelocity2d(new Vector2d(0.0, 0.0), 0.0);
+
             GoBildaPinpointDriver.EncoderDirection parDirection = pl.initialParDirection;
             GoBildaPinpointDriver.EncoderDirection perpDirection = pl.initialPerpDirection;
 
             @Override
             public void update() {
-                pl.driver.update();
+                vel = pl.update();
             }
 
             @Override
             public int getParEncoderPosition() {
-                return pl.driver.getEncoderX();
+                if (parDirection == GoBildaPinpointDriver.EncoderDirection.FORWARD) return pl.driver.getEncoderX();
+                else return -pl.driver.getEncoderX();
+            }
+
+            @Override
+            public int getParEncoderVelocity() {
+                return (int) Math.round(vel.linearVel.x / pl.inPerTick);
             }
 
             @Override
             public int getPerpEncoderPosition() {
-                return pl.driver.getEncoderY();
+                if (perpDirection == GoBildaPinpointDriver.EncoderDirection.FORWARD) return pl.driver.getEncoderY();
+                else return -pl.driver.getEncoderY();
+            }
+
+            @Override
+            public int getPerpEncoderVelocity() {
+                return (int) Math.round(vel.linearVel.y / pl.inPerTick);
             }
 
             @Override
             public float getHeadingVelocity() {
-                return (float) pl.driver.getHeadingVelocity();
+                return (float) vel.angVel;
+            }
+
+            @NonNull
+            @Override
+            public DcMotorSimple.Direction getParDirection() {
+                if (parDirection == GoBildaPinpointDriver.EncoderDirection.FORWARD) return DcMotorSimple.Direction.FORWARD;
+                else return DcMotorSimple.Direction.REVERSE;
             }
 
             @Override
@@ -98,6 +121,13 @@ public final class TuningOpModes {
                         GoBildaPinpointDriver.EncoderDirection.FORWARD :
                         GoBildaPinpointDriver.EncoderDirection.REVERSED;
                 pl.driver.setEncoderDirections(parDirection, perpDirection);
+            }
+
+            @NonNull
+            @Override
+            public DcMotorSimple.Direction getPerpDirection() {
+                if (perpDirection == GoBildaPinpointDriver.EncoderDirection.FORWARD) return DcMotorSimple.Direction.FORWARD;
+                else return DcMotorSimple.Direction.REVERSE;
             }
 
             @Override
