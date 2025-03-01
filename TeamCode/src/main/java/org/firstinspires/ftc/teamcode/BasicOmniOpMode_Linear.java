@@ -74,7 +74,7 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
         while (opModeIsActive()) {
 
             // Slow mode
-            if (gamepad1.right_bumper) {
+            if (gamepad2.right_trigger > 0.1){
                 driveSpeedMultiplier = config.slowDriveSpeedMultiplier;
                 pivotSpeedMultiplier = config.slowPivotSpeedMultiplier;
             } else {
@@ -152,8 +152,23 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
             if (gamepad2.left_stick_button) {
                 slidePosition = config.slideMaximumPositionHigh;
             }
+
+            if (gamepad2.left_bumper) {
+                slidePosition = config.slideMinimumSpecimen;
+            }
+
+            if (gamepad2.right_bumper) {
+                slidePosition = config.slideMaximumSpecimen;
+            }
+
+
+
             slide.setTargetPosition((int) slidePosition);
             slide.setPower(1); // We can adjust the power maybe
+
+
+
+
 
             // Motor set run to position out of loop
 
@@ -171,11 +186,11 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
 
             // Bucket controls
 
-            if (gamepad2.left_bumper) {
+            if (gamepad1.left_bumper) {
                 bucket.setPosition(0.5);
             }
 
-            if (gamepad2.right_bumper) {
+            if (gamepad1.right_bumper) {
                 bucket.setPosition(1);
             }
 
@@ -190,13 +205,15 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
             telemetry.addData("Slider", slidePosition);
 
             telemetry.addData("gamepad1 controls", "");
-            telemetry.addData("Right bumper", "Slow mode");
+            telemetry.addData("Right trigger", "Slow mode");
             telemetry.addData("Left stick up", "move forwards");
             telemetry.addData("Left stick back", "move backwards");
             telemetry.addData("right stick left", "turn left");
             telemetry.addData("right stick right", "turn right");
             telemetry.addData("left stick left", "strafe left");
             telemetry.addData("left stick right", "strafe right");
+            telemetry.addData("bucket up", "left_bumper");
+            telemetry.addData("bucket down", "right_bumper");
             telemetry.addData("gamepad2 controls", "");
             telemetry.addData("cross", "gripper clamp");
             telemetry.addData("circle", "gripper let go");
@@ -204,11 +221,11 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
             telemetry.addData("d pad down", "arm down");
             telemetry.addData("d pad left", "rotator right");
             telemetry.addData("d pad right", "rotator left");
-            telemetry.addData("bucket up", "left_bumper");
-            telemetry.addData("bucket down", "right_bumper");
             telemetry.addData("left trigger", "slide to low basket");
             telemetry.addData("Left joystick button", "slide to high basket");
             telemetry.addData("right trigger", "slide to 0");
+            telemetry.addData("Left trigger", "slide to specimen");
+            telemetry.addData("right trigger", "slide high bar");
 
             telemetry.update();
 

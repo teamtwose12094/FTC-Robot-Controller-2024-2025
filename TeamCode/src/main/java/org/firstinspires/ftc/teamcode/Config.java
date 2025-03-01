@@ -39,6 +39,10 @@ public class Config {
 
     double slideMaximumPositionHigh = 2500;
 
+    double slideMaximumSpecimen = 1400;
+
+    double slideMinimumSpecimen = 100;
+
     double slideSecondPosition = 1050; // robot is 40 inches
 
     double slideHighPosition = 4000; // max slide
