@@ -124,7 +124,7 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
             // Arm controls (Gamepad 2)
             if (gamepad2.dpad_up) {
                 armPosition += config.armStep;
-                rotator.setPosition(0.7);
+                rotator.setPosition(0.6);
             } else if (gamepad2.dpad_down) {
                 armPosition -= config.armStep;
                 rotator.setPosition(0);
@@ -203,6 +203,7 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
             telemetry.addData("Gripper", gripper.getPosition());
             telemetry.addData("Bucket", bucket.getPosition());
             telemetry.addData("Slider", slidePosition);
+            telemetry.addData("Arm", armPosition);
 
             telemetry.addData("gamepad1 controls", "");
             telemetry.addData("Right trigger", "Slow mode");
