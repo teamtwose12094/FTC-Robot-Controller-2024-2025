@@ -74,7 +74,7 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
         while (opModeIsActive()) {
 
             // Slow mode
-            if (gamepad2.right_trigger > 0.1){
+            if (gamepad1.right_trigger > 0.1){
                 driveSpeedMultiplier = config.slowDriveSpeedMultiplier;
                 pivotSpeedMultiplier = config.slowPivotSpeedMultiplier;
             } else {
