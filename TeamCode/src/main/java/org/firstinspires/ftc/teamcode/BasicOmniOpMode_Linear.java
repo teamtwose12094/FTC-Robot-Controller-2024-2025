@@ -178,10 +178,10 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
             // Gripper controls
 
             if (gamepad2.circle) {
-                gripper.setPosition(1);
+                gripper.setPosition(0.8);
             }
             if (gamepad2.cross) {
-                gripper.setPosition(0);
+                gripper.setPosition(0.3);
             }
 
             // Bucket controls
