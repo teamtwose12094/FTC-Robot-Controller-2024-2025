@@ -216,7 +216,48 @@ public class Yellow extends LinearOpMode {
         }
 
         public Action rotatorDown() {
-            return new rotatorDown;
+            return new rotatorDown();
+        }
+    }
+
+    public class Bucket {
+        private Servo bucket;
+
+        public Bucket(HardwareMap hardwareMap) {
+
+
+            bucket = hardwareMap.get(Servo.class, ("bucket"));
+            bucket.setDirection(Servo.Direction.FORWARD);
+        }
+
+        public class bucketDown implements Action{
+            @Override
+
+            public boolean run(@NonNull TelemetryPacket packet) {
+                bucket.setPosition(1);
+
+                return false;
+            }
+
+        }
+
+        public Action bucketDown() {
+            return new bucketDown();
+        }
+
+        public class bucketUp implements Action{
+            @Override
+
+            public boolean run(@NonNull TelemetryPacket packet) {
+                bucket.setPosition(0.5);
+
+                return false;
+            }
+
+        }
+
+        public Action bucketUp() {
+            return new bucketUp();
         }
     }
 
@@ -236,6 +277,14 @@ public class Yellow extends LinearOpMode {
 
         // Initialize the hardware
         Slide slide = new Slide(hardwareMap);
+
+        Arm arm = new Arm(hardwareMap);
+
+        Rotator rotator = new Rotator(hardwareMap);
+
+        Gripper gripper = new Gripper(hardwareMap);
+
+        Bucket bucket = new Bucket(hardwareMap);
 
         // Wait for the start button to be pressed
         waitForStart();
