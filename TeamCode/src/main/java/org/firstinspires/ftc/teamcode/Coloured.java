@@ -16,8 +16,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @Config
-@Autonomous(name = "Yellow", group = "Autonomous")
-public class Yellow extends LinearOpMode {
+@Autonomous(name = "Coloured", group = "Autonomous")
+public class Coloured extends LinearOpMode {
     public class Slide {
         private DcMotor slide;
         public Slide(HardwareMap hardwareMap) {
@@ -25,7 +25,6 @@ public class Yellow extends LinearOpMode {
 
             slide = hardwareMap.get(DcMotor.class, "slide");
             slide.setDirection(DcMotor.Direction.FORWARD);
-
         }
 
         public class slideToWall implements Action{
@@ -34,7 +33,6 @@ public class Yellow extends LinearOpMode {
             public boolean run(@NonNull TelemetryPacket packet) {
                 slide.setTargetPosition(100);
                 slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                slide.setPower(0.5);
 
                 return false;
             }
@@ -50,7 +48,6 @@ public class Yellow extends LinearOpMode {
             public boolean run(@NonNull TelemetryPacket packet) {
                 slide.setTargetPosition(1400);
                 slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                slide.setPower(0.5);
 
                 return false;
             }
@@ -68,7 +65,6 @@ public class Yellow extends LinearOpMode {
             public boolean run(@NonNull TelemetryPacket packet) {
                 slide.setTargetPosition(2500);
                 slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                slide.setPower(0.5);
 
                 return false;
             }
@@ -86,7 +82,6 @@ public class Yellow extends LinearOpMode {
             public boolean run(@NonNull TelemetryPacket packet) {
                 slide.setTargetPosition(0);
                 slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                slide.setPower(0.5);
 
                 return false;
             }
@@ -111,9 +106,8 @@ public class Yellow extends LinearOpMode {
             @Override
 
             public boolean run(@NonNull TelemetryPacket packet) {
-                arm.setTargetPosition(-295);
+                arm.setTargetPosition(0);
                 arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                arm.setPower(0.5);
 
                 return false;
             }
@@ -131,9 +125,8 @@ public class Yellow extends LinearOpMode {
             @Override
 
             public boolean run(@NonNull TelemetryPacket packet) {
-                arm.setTargetPosition(470);
+                arm.setTargetPosition(150);
                 arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                arm.setPower(0.5);
 
                 return false;
             }
@@ -205,7 +198,7 @@ public class Yellow extends LinearOpMode {
             @Override
 
             public boolean run(@NonNull TelemetryPacket packet) {
-                rotator.setPosition(1);
+                rotator.setPosition(0.6);
 
                 return false;
             }
@@ -262,7 +255,7 @@ public class Yellow extends LinearOpMode {
             @Override
 
             public boolean run(@NonNull TelemetryPacket packet) {
-                bucket.setPosition(0);
+                bucket.setPosition(0.5);
 
                 return false;
             }
@@ -283,7 +276,7 @@ public class Yellow extends LinearOpMode {
     @Override
     public void runOpMode() {
         // Initialize the starting pose
-        Pose2d beginPose = new Pose2d(7.5, -62.5, 0);
+        Pose2d beginPose = new Pose2d(24, -62.5, 0);
 
         // Initialize the drive system
         MecanumDrive drive = new MecanumDrive(hardwareMap, beginPose);
@@ -307,79 +300,28 @@ public class Yellow extends LinearOpMode {
         // Run the autonomous sequence
         Actions.runBlocking(
                 new SequentialAction(
-                        bucket.bucketUp(),
                         drive.actionBuilder(beginPose)
-                                .strafeTo(new Vector2d(7.5, -55))
-                                .strafeTo(new Vector2d(-50, -55))
-                                .turn(Math.toRadians(45))
-                                .strafeTo(new Vector2d(-54, -54))
+                                .strafeTo(new Vector2d(0, -34))
+                                .turn(Math.toRadians(-90))
                                 .build(),
-                        slide.slideToHighBasket(), // Move slide to high basket
-                        new SleepAction(3),
-                        bucket.bucketDown(),
-                        new SleepAction(2),
-                        bucket.bucketUp(),
+                        slide.slideToHighBar(),
+                        drive.actionBuilder(new Pose2d(0, -34, Math.toRadians(-90)))
+                                .strafeTo(new Vector2d(0, -33))
+                                .build(),
                         slide.slideToZero(),
-                        new SleepAction(3),
-                        drive.actionBuilder(new Pose2d(-54, -54, Math.toRadians(45)))
-                            .turn(Math.toRadians(45))
-                            .strafeTo(new Vector2d(-45, -45))
-                            .build(),
-                        gripper.gripperOpen(),
-                        rotator.rotatorDown(),
-                        arm.armDown(),
-                        gripper.gripperClose(),
-                        arm.armUp(),
-                        rotator.rotatorUp(),
-                        gripper.gripperOpen(),
-                        drive.actionBuilder(new Pose2d(-45, -45, Math.toRadians(90)))
-                                .turn(Math.toRadians(45))
-                                .strafeTo(new Vector2d(-54, -54))
-                                .build(),
-                        slide.slideToHighBasket(),
-                        bucket.bucketDown(),
-                        bucket.bucketUp(),
-                        slide.slideToZero(),
-
-                        drive.actionBuilder(new Pose2d(-54, -54, Math.toRadians(45)))
-                                .turn(Math.toRadians(45))
-                                .strafeTo(new Vector2d(-55, -45))
-                                .build(),
-                        gripper.gripperOpen(),
-                        rotator.rotatorDown(),
-                        arm.armDown(),
-                        gripper.gripperClose(),
-                        arm.armUp(),
-                        rotator.rotatorUp(),
-                        gripper.gripperOpen(),
-                        drive.actionBuilder(new Pose2d(-55, -45, Math.toRadians(90)))
-                                .turn(Math.toRadians(45))
-                                .strafeTo(new Vector2d(-54, -54))
-                                .build(),
-                        slide.slideToHighBasket(),
-                        bucket.bucketDown(),
-                        bucket.bucketUp(),
-                        slide.slideToZero(),
-
-                        drive.actionBuilder(new Pose2d(-54, -54, Math.toRadians(45)))
-                                .turn(Math.toRadians(45))
-                                .strafeTo(new Vector2d(-65, -45))
-                                .build(),
-                        gripper.gripperOpen(),
-                        rotator.rotatorDown(),
-                        arm.armDown(),
-                        gripper.gripperClose(),
-                        arm.armUp(),
-                        rotator.rotatorUp(),
-                        gripper.gripperOpen(),
-                        drive.actionBuilder(new Pose2d(-65, -45, Math.toRadians(90)))
-                                .turn(Math.toRadians(45))
-                                .strafeTo(new Vector2d(-54, -54))
-                                .build(),
-                        slide.slideToHighBasket(),
-                        bucket.bucketDown(),
-                        bucket.bucketUp(),
-                        slide.slideToZero()
+                        drive.actionBuilder(new Pose2d(0, -33, Math.toRadians(-90)))
+                                .strafeTo(new Vector2d(0, -36))
+                                .strafeTo(new Vector2d(25, -36))
+                                .strafeTo(new Vector2d(40, -14))
+                                .strafeTo(new Vector2d(48, -14))
+                                .strafeTo(new Vector2d(48, -57))
+                                .strafeTo(new Vector2d(48, -14))
+                                .strafeTo(new Vector2d(58, -14))
+                                .strafeTo(new Vector2d(58, -57))
+                                .strafeTo(new Vector2d(58, -14))
+                                .strafeTo(new Vector2d(62.5, -14))
+                                .strafeTo(new Vector2d(62.5, -57))
+                                .build()
 
 
 
@@ -390,6 +332,6 @@ public class Yellow extends LinearOpMode {
 
                 )
         );
-
     }
 }
+

@@ -15,13 +15,76 @@ public class MeepMeepTesting {
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
                 .build();
 
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(7.5, -62.5, 0))
-                .strafeTo(new Vector2d(30, -62.5))
-                .waitSeconds(1)
-                .strafeTo(new Vector2d(-50, -2))
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(24, -62.5, 0))
+                .strafeTo(new Vector2d(7.5, -55))
+                .strafeTo(new Vector2d(-50, -55))
+                .turn(Math.toRadians(45))
+                .strafeTo(new Vector2d(-54, -53))
+                // slide up
+                // bucket down
+                // bucket up
+                // slide down
+                .turn(Math.toRadians(45))
+                .strafeTo(new Vector2d(-45, -45))
+                // gripper open
+                //rotator down
+                // arm down
+                //gripper close
+                // arm Up
+                // rotator up
+                // gripper open
+                .turn(Math.toRadians(-45))
+                .strafeTo(new Vector2d(-54, -53))
+                // slide up
+                // bucket down
+                // bucket up
+                // slide down
+                .turn(Math.toRadians(45))
+                .strafeTo(new Vector2d(-55, -45))
+                // gripper open
+                //rotator down
+                // arm down
+                //gripper close
+                // arm Up
+                // rotator up
+                // gripper open
+                .turn(Math.toRadians(-45))
+                .strafeTo(new Vector2d(-54, -53))
+                // slide up
+                // bucket down
+                // bucket up
+                // slide down
+                .turn(Math.toRadians(45))
+                .strafeTo(new Vector2d(-65, -45))
+                // gripper open
+                //rotator down
+                // arm down
+                //gripper close
+                // arm Up
+                // rotator up
+                // gripper open
+                .turn(Math.toRadians(-45))
+                .strafeTo(new Vector2d(-54, -53))
+                // slide up
+                // bucket down
+                // bucket up
+                // slide down
+
+
+
+
+
+
                 .build());
 
-        myBot.setDimensions(15, 15);
+
+
+
+
+
+
+
+        myBot.setDimensions(14, 16);
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_JUICE_DARK)
                 .setDarkMode(true)

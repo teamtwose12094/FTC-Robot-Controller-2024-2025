@@ -61,7 +61,7 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
         backRightDrive.setDirection(DcMotor.Direction.REVERSE);
         arm.setDirection(DcMotor.Direction.REVERSE);
         slide.setDirection(DcMotor.Direction.FORWARD);
-        gripper.setDirection(Servo.Direction.REVERSE);
+        gripper.setDirection(Servo.Direction.FORWARD);
         rotator.setDirection(Servo.Direction.REVERSE);
         bucket.setDirection(Servo.Direction.FORWARD);
 
@@ -124,7 +124,7 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
             // Arm controls (Gamepad 2)
             if (gamepad2.dpad_up) {
                 armPosition += config.armStep;
-                rotator.setPosition(0.6);
+                rotator.setPosition(0.4);
             } else if (gamepad2.dpad_down) {
                 armPosition -= config.armStep;
                 rotator.setPosition(0);
@@ -136,7 +136,7 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
             // Rotator separate controls
 
             if (gamepad2.dpad_left) {
-                rotator.setPosition(0.6);
+                rotator.setPosition(1);
             } else if (gamepad2.dpad_right) {
                 rotator.setPosition(0);
             }
@@ -178,16 +178,16 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
             // Gripper controls
 
             if (gamepad2.circle) {
-                gripper.setPosition(0.8);
+                gripper.setPosition(1);
             }
             if (gamepad2.cross) {
-                gripper.setPosition(0.3);
+                gripper.setPosition(0);
             }
 
             // Bucket controls
 
             if (gamepad1.left_bumper) {
-                bucket.setPosition(0.5);
+                bucket.setPosition(0);
             }
 
             if (gamepad1.right_bumper) {
