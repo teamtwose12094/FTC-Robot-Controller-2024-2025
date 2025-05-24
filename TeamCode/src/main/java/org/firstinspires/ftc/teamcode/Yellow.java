@@ -29,7 +29,7 @@ public class Yellow extends LinearOpMode {
         }
 
         public class slideToWall implements Action{
-            @Override
+            //@Override
 
             public boolean run(@NonNull TelemetryPacket packet) {
                 slide.setTargetPosition(100);
@@ -45,7 +45,7 @@ public class Yellow extends LinearOpMode {
             return new slideToWall();
         }
         public class slideToHighBar implements Action{
-            @Override
+            //@Override
 
             public boolean run(@NonNull TelemetryPacket packet) {
                 slide.setTargetPosition(1400);
@@ -63,7 +63,7 @@ public class Yellow extends LinearOpMode {
         }
 
         public class slideToHighBasket implements Action{
-            @Override
+            //@Override
 
             public boolean run(@NonNull TelemetryPacket packet) {
                 slide.setTargetPosition(2500);
@@ -81,7 +81,7 @@ public class Yellow extends LinearOpMode {
         }
 
         public class slideToZero implements Action {
-            @Override
+            //@Override
 
             public boolean run(@NonNull TelemetryPacket packet) {
                 slide.setTargetPosition(0);
@@ -108,7 +108,7 @@ public class Yellow extends LinearOpMode {
 
 
         public class armDown implements Action{
-            @Override
+            //@Override
 
             public boolean run(@NonNull TelemetryPacket packet) {
                 arm.setTargetPosition(-295);
@@ -128,7 +128,7 @@ public class Yellow extends LinearOpMode {
 
 
         public class armUp implements Action{
-            @Override
+            //@Override
 
             public boolean run(@NonNull TelemetryPacket packet) {
                 arm.setTargetPosition(470);
@@ -157,7 +157,7 @@ public class Yellow extends LinearOpMode {
         }
 
         public class gripperOpen implements Action{
-            @Override
+            //@Override
 
             public boolean run(@NonNull TelemetryPacket packet) {
                 gripper.setPosition(1);
@@ -173,7 +173,7 @@ public class Yellow extends LinearOpMode {
         }
 
         public class gripperClose implements Action{
-            @Override
+            //@Override
 
             public boolean run(@NonNull TelemetryPacket packet) {
                 gripper.setPosition(0);
@@ -202,7 +202,7 @@ public class Yellow extends LinearOpMode {
 
 
         public class rotatorUp implements Action{
-            @Override
+            //@Override
 
             public boolean run(@NonNull TelemetryPacket packet) {
                 rotator.setPosition(1);
@@ -218,7 +218,7 @@ public class Yellow extends LinearOpMode {
         }
 
         public class rotatorDown implements Action{
-            @Override
+           // @Override
 
             public boolean run(@NonNull TelemetryPacket packet) {
                 rotator.setPosition(0);
@@ -244,7 +244,7 @@ public class Yellow extends LinearOpMode {
         }
 
         public class bucketDown implements Action{
-            @Override
+            //@Override
 
             public boolean run(@NonNull TelemetryPacket packet) {
                 bucket.setPosition(1);
@@ -259,7 +259,7 @@ public class Yellow extends LinearOpMode {
         }
 
         public class bucketUp implements Action{
-            @Override
+            //@Override
 
             public boolean run(@NonNull TelemetryPacket packet) {
                 bucket.setPosition(0);
@@ -280,7 +280,7 @@ public class Yellow extends LinearOpMode {
 
 
 
-    @Override
+    //@Override
     public void runOpMode() {
         // Initialize the starting pose
         Pose2d beginPose = new Pose2d(7.5, -62.5, 0);
@@ -308,7 +308,7 @@ public class Yellow extends LinearOpMode {
         Actions.runBlocking(
                 new SequentialAction(
                         bucket.bucketUp(),
-                        drive.actionBuilder(beginPose)
+                        drive.actionBuilder(beginPose) // Move to basket
                                 .strafeTo(new Vector2d(7.5, -55))
                                 .strafeTo(new Vector2d(-50, -55))
                                 .turn(Math.toRadians(45))
