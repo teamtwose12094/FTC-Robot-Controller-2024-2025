@@ -15,6 +15,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import java.util.concurrent.TimeUnit;
+
 @Config
 @Autonomous(name = "Yellow", group = "Autonomous")
 public class Yellow extends LinearOpMode {
@@ -66,7 +68,7 @@ public class Yellow extends LinearOpMode {
             //@Override
 
             public boolean run(@NonNull TelemetryPacket packet) {
-                slide.setTargetPosition(2500);
+                slide.setTargetPosition(5000);
                 slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 slide.setPower(0.5);
 
@@ -315,12 +317,12 @@ public class Yellow extends LinearOpMode {
                                 .strafeTo(new Vector2d(-54, -54))
                                 .build(),
                         slide.slideToHighBasket(), // Move slide to high basket
-                        new SleepAction(3),
+                        //new SleepAction(3),
                         bucket.bucketDown(),
-                        new SleepAction(2),
+                         //new SleepAction(2),
                         bucket.bucketUp(),
                         slide.slideToZero(),
-                        new SleepAction(3),
+                        //new SleepAction(3),
                         drive.actionBuilder(new Pose2d(-54, -54, Math.toRadians(45)))
                             .turn(Math.toRadians(45))
                             .strafeTo(new Vector2d(-45, -45))
