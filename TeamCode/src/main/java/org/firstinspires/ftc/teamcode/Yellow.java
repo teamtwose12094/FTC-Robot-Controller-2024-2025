@@ -317,12 +317,12 @@ public class Yellow extends LinearOpMode {
                                 .strafeTo(new Vector2d(-54, -54))
                                 .build(),
                         slide.slideToHighBasket(), // Move slide to high basket
-                        //new SleepAction(3),
+                        new SleepAction(3.0),
                         bucket.bucketDown(),
-                         //new SleepAction(2),
+                        new SleepAction(2.0),
                         bucket.bucketUp(),
                         slide.slideToZero(),
-                        //new SleepAction(3),
+                        new SleepAction(3.0),
                         drive.actionBuilder(new Pose2d(-54, -54, Math.toRadians(45)))
                             .turn(Math.toRadians(45))
                             .strafeTo(new Vector2d(-45, -45))
