@@ -12,6 +12,7 @@ import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -26,7 +27,7 @@ public class Yellow extends LinearOpMode {
 
 
             slide = hardwareMap.get(DcMotor.class, "slide");
-            slide.setDirection(DcMotor.Direction.FORWARD);
+            slide.setDirection(DcMotor.Direction.REVERSE);
 
         }
 
@@ -104,7 +105,7 @@ public class Yellow extends LinearOpMode {
 
 
             arm = hardwareMap.get(DcMotor.class, ("arm"));
-            arm.setDirection(DcMotor.Direction.REVERSE);
+            arm.setDirection(DcMotor.Direction.FORWARD); //Reverse
         }
 
 
@@ -155,7 +156,7 @@ public class Yellow extends LinearOpMode {
 
 
             gripper = hardwareMap.get(Servo.class, ("gripper"));
-            gripper.setDirection(Servo.Direction.REVERSE);
+            gripper.setDirection(Servo.Direction.FORWARD); //Reverse
         }
 
         public class gripperOpen implements Action{
@@ -240,7 +241,6 @@ public class Yellow extends LinearOpMode {
 
         public Bucket(HardwareMap hardwareMap) {
 
-
             bucket = hardwareMap.get(Servo.class, ("bucket"));
             bucket.setDirection(Servo.Direction.FORWARD);
         }
@@ -290,6 +290,7 @@ public class Yellow extends LinearOpMode {
         // Initialize the drive system
         MecanumDrive drive = new MecanumDrive(hardwareMap, beginPose);
 
+        //
         // Initialize the hardware
         Slide slide = new Slide(hardwareMap);
 
@@ -310,78 +311,78 @@ public class Yellow extends LinearOpMode {
         Actions.runBlocking(
                 new SequentialAction(
                         bucket.bucketUp(),
-                        drive.actionBuilder(beginPose) // Move to basket
-                                .strafeTo(new Vector2d(7.5, -55))
-                                .strafeTo(new Vector2d(-50, -55))
-                                .turn(Math.toRadians(45))
-                                .strafeTo(new Vector2d(-54, -54))
-                                .build(),
-                        slide.slideToHighBasket(), // Move slide to high basket
+//                        drive.actionBuilder(beginPose) // Move to basket
+//                                .strafeTo(new Vector2d(7.5, -55))
+//                                .strafeTo(new Vector2d(-50, -55))
+//                                .turn(Math.toRadians(45))
+//                                .strafeTo(new Vector2d(-54, -54))
+//                                .build()
+//                        slide.slideToHighBasket(), // Move slide to high basket
                         new SleepAction(3.0),
-                        bucket.bucketDown(),
-                        new SleepAction(2.0),
-                        bucket.bucketUp(),
-                        slide.slideToZero(),
-                        new SleepAction(3.0),
-                        drive.actionBuilder(new Pose2d(-54, -54, Math.toRadians(45)))
-                            .turn(Math.toRadians(45))
-                            .strafeTo(new Vector2d(-45, -45))
-                            .build(),
-                        gripper.gripperOpen(),
-                        rotator.rotatorDown(),
-                        arm.armDown(),
-                        gripper.gripperClose(),
-                        arm.armUp(),
-                        rotator.rotatorUp(),
-                        gripper.gripperOpen(),
-                        drive.actionBuilder(new Pose2d(-45, -45, Math.toRadians(90)))
-                                .turn(Math.toRadians(45))
-                                .strafeTo(new Vector2d(-54, -54))
-                                .build(),
-                        slide.slideToHighBasket(),
-                        bucket.bucketDown(),
-                        bucket.bucketUp(),
-                        slide.slideToZero(),
-
-                        drive.actionBuilder(new Pose2d(-54, -54, Math.toRadians(45)))
-                                .turn(Math.toRadians(45))
-                                .strafeTo(new Vector2d(-55, -45))
-                                .build(),
-                        gripper.gripperOpen(),
-                        rotator.rotatorDown(),
-                        arm.armDown(),
-                        gripper.gripperClose(),
-                        arm.armUp(),
-                        rotator.rotatorUp(),
-                        gripper.gripperOpen(),
-                        drive.actionBuilder(new Pose2d(-55, -45, Math.toRadians(90)))
-                                .turn(Math.toRadians(45))
-                                .strafeTo(new Vector2d(-54, -54))
-                                .build(),
-                        slide.slideToHighBasket(),
-                        bucket.bucketDown(),
-                        bucket.bucketUp(),
-                        slide.slideToZero(),
-
-                        drive.actionBuilder(new Pose2d(-54, -54, Math.toRadians(45)))
-                                .turn(Math.toRadians(45))
-                                .strafeTo(new Vector2d(-65, -45))
-                                .build(),
-                        gripper.gripperOpen(),
-                        rotator.rotatorDown(),
-                        arm.armDown(),
-                        gripper.gripperClose(),
-                        arm.armUp(),
-                        rotator.rotatorUp(),
-                        gripper.gripperOpen(),
-                        drive.actionBuilder(new Pose2d(-65, -45, Math.toRadians(90)))
-                                .turn(Math.toRadians(45))
-                                .strafeTo(new Vector2d(-54, -54))
-                                .build(),
-                        slide.slideToHighBasket(),
-                        bucket.bucketDown(),
-                        bucket.bucketUp(),
-                        slide.slideToZero()
+                        bucket.bucketDown()
+//                        new SleepAction(2.0),
+//                        bucket.bucketUp(),
+//                        slide.slideToZero(),
+//                        new SleepAction(3.0),
+//                        drive.actionBuilder(new Pose2d(-54, -54, Math.toRadians(45)))
+//                            .turn(Math.toRadians(45))
+//                            .strafeTo(new Vector2d(-45, -45))
+//                            .build(),
+//                        gripper.gripperOpen(),
+//                        rotator.rotatorDown(),
+//                        arm.armDown(),
+//                        gripper.gripperClose(),
+//                        arm.armUp(),
+//                        rotator.rotatorUp(),
+//                        gripper.gripperOpen(),
+//                        drive.actionBuilder(new Pose2d(-45, -45, Math.toRadians(90)))
+//                                .turn(Math.toRadians(45))
+//                                .strafeTo(new Vector2d(-54, -54))
+//                                .build(),
+//                        slide.slideToHighBasket(),
+//                        bucket.bucketDown(),
+//                        bucket.bucketUp(),
+//                        slide.slideToZero(),
+//
+//                        drive.actionBuilder(new Pose2d(-54, -54, Math.toRadians(45)))
+//                                .turn(Math.toRadians(45))
+//                                .strafeTo(new Vector2d(-55, -45))
+//                                .build(),
+//                        gripper.gripperOpen(),
+//                        rotator.rotatorDown(),
+//                        arm.armDown(),
+//                        gripper.gripperClose(),
+//                        arm.armUp(),
+//                        rotator.rotatorUp(),
+//                        gripper.gripperOpen(),
+//                        drive.actionBuilder(new Pose2d(-55, -45, Math.toRadians(90)))
+//                                .turn(Math.toRadians(45))
+//                                .strafeTo(new Vector2d(-54, -54))
+//                                .build(),
+//                        slide.slideToHighBasket(),
+//                        bucket.bucketDown(),
+//                        bucket.bucketUp(),
+//                        slide.slideToZero(),
+//
+//                        drive.actionBuilder(new Pose2d(-54, -54, Math.toRadians(45)))
+//                                .turn(Math.toRadians(45))
+//                                .strafeTo(new Vector2d(-65, -45))
+//                                .build(),
+//                        gripper.gripperOpen(),
+//                        rotator.rotatorDown(),
+//                        arm.armDown(),
+//                        gripper.gripperClose(),
+//                        arm.armUp(),
+//                        rotator.rotatorUp(),
+//                        gripper.gripperOpen(),
+//                        drive.actionBuilder(new Pose2d(-65, -45, Math.toRadians(90)))
+//                                .turn(Math.toRadians(45))
+//                                .strafeTo(new Vector2d(-54, -54))
+//                                .build(),
+//                        slide.slideToHighBasket(),
+//                        bucket.bucketDown(),
+//                        bucket.bucketUp(),
+//                        slide.slideToZero()
 
 
 

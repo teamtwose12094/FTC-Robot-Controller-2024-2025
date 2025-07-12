@@ -8,6 +8,11 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+/*
+Connect to roboto  wifi
+open comamd prtompt and type "adb connect 192.168.43.1"
+ */
+
 @TeleOp(name="Basic: Omni Linear OpMode OLD", group="Linear OpMode")
 public class BasicOmniOpMode_LinearOLD extends LinearOpMode {
 
@@ -61,8 +66,8 @@ public class BasicOmniOpMode_LinearOLD extends LinearOpMode {
         backLeftDrive.setDirection(DcMotor.Direction.REVERSE);
         frontRightDrive.setDirection(DcMotor.Direction.REVERSE);
         backRightDrive.setDirection(DcMotor.Direction.FORWARD);
-        arm.setDirection(DcMotor.Direction.REVERSE);
-        slide.setDirection(DcMotor.Direction.FORWARD);
+        arm.setDirection(DcMotor.Direction.FORWARD);
+        slide.setDirection(DcMotor.Direction.REVERSE);
         gripper.setDirection(Servo.Direction.FORWARD);
         rotator.setDirection(Servo.Direction.REVERSE);
         bucket.setDirection(Servo.Direction.FORWARD);
@@ -205,6 +210,7 @@ public class BasicOmniOpMode_LinearOLD extends LinearOpMode {
             telemetry.addData("Gripper", gripper.getPosition());
             telemetry.addData("Bucket", bucket.getPosition());
             telemetry.addData("Slider", slidePosition);
+            telemetry.addData("slider motor", slide.getTargetPosition());
             telemetry.addData("Arm", armPosition);
 
             telemetry.addData("gamepad1 controls", "");
