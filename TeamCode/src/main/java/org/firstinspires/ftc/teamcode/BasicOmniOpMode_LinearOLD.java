@@ -58,10 +58,10 @@ public class BasicOmniOpMode_LinearOLD extends LinearOpMode {
         rotator = hardwareMap.get(Servo.class, "rotator");
         bucket = hardwareMap.get(Servo.class, "bucket");
 
-        frontLeftDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        backLeftDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        frontRightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        backRightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontLeftDrive.setDirection(DcMotor.Direction.REVERSE);
         backLeftDrive.setDirection(DcMotor.Direction.REVERSE);
         frontRightDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -131,10 +131,10 @@ public class BasicOmniOpMode_LinearOLD extends LinearOpMode {
             // Arm controls (Gamepad 2)
             if (gamepad2.dpad_up) {
                 armPosition += config.armStep;
-                rotator.setPosition(0.4);
+                //rotator.setPosition(0.4);
             } else if (gamepad2.dpad_down) {
                 armPosition -= config.armStep;
-                rotator.setPosition(0);
+                //rotator.setPosition(0);
             }
 
             arm.setTargetPosition((int) armPosition);
@@ -194,7 +194,7 @@ public class BasicOmniOpMode_LinearOLD extends LinearOpMode {
             // Bucket controls
 
             if (gamepad1.left_bumper) {
-                bucket.setPosition(0);
+                bucket.setPosition(0.5);
             }
 
             if (gamepad1.right_bumper) {
