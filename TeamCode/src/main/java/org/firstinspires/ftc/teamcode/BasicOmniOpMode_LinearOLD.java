@@ -198,7 +198,7 @@ public class BasicOmniOpMode_LinearOLD extends LinearOpMode {
             }
 
             if (gamepad1.right_bumper) {
-                bucket.setPosition(1);
+                bucket.setPosition(0.95);
             }
 
 

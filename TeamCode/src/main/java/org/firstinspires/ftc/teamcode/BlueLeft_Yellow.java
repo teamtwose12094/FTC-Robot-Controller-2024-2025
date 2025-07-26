@@ -27,11 +27,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.tuning;
+package org.firstinspires.ftc.teamcode;
+
+import androidx.annotation.NonNull;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import com.acmerobotics.roadrunner.Action;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -77,11 +80,15 @@ public class BlueLeft_Yellow extends LinearOpMode {
     public void runOpMode() {
 
         // Initialize the drive system variables.
-        frontLeftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
-        frontRightDrive = hardwareMap.get(DcMotor.class, "right_drive");
-        backRightDrive = hardwareMap.get(DcMotor.class, "right_drive");
-        backLeftDrive = hardwareMap.get(DcMotor.class, "right_drive");
-
+        frontLeftDrive = hardwareMap.get(DcMotor.class, "frontLeftDrive");
+        frontRightDrive = hardwareMap.get(DcMotor.class, "frontRightDrive");
+        backRightDrive = hardwareMap.get(DcMotor.class, "backRightDrive");
+        backLeftDrive = hardwareMap.get(DcMotor.class, "backLeftDrive");
+        frontLeftDrive.setDirection(DcMotor.Direction.REVERSE);
+        backLeftDrive.setDirection(DcMotor.Direction.REVERSE);
+        frontRightDrive.setDirection(DcMotor.Direction.REVERSE);
+        backRightDrive.setDirection(DcMotor.Direction.FORWARD);
+        //slide.setDirection(DcMotor.Direction.REVERSE);
 
 
         // Send telemetry message to signify robot waiting;
@@ -91,6 +98,95 @@ public class BlueLeft_Yellow extends LinearOpMode {
         // Wait for the game to start (driver presses START)
         waitForStart();
 
+        //Sequence Starts Here
 
+        moveBackward(0.5, 550);
+        strafeLeft(1, 200);
+        sleep(100);
+        turnLeft(1, 250);
+        strafeLeft(1, 300);
+        //slideToHighBasket();
+
+
+        if (isStopRequested()) {
+            return;
+
+        }
     }
+
+
+    public void moveForward(double power, long time) {
+        frontLeftDrive.setPower(power);
+        frontRightDrive.setPower(power);
+        backLeftDrive.setPower(power);
+        backRightDrive.setPower(power);
+        sleep(time);
+        stopMotors();
+    }
+
+    public void moveBackward(double power, long time) {
+        frontLeftDrive.setPower(-power);
+        frontRightDrive.setPower(-power);
+        backLeftDrive.setPower(-power);
+        backRightDrive.setPower(-power);
+        sleep(time);
+        stopMotors();
+    }
+
+    public void turnRight(double power, long time) {
+        frontLeftDrive.setPower(power);
+        frontRightDrive.setPower(-power);
+        backLeftDrive.setPower(power);
+        backRightDrive.setPower(-power);
+        sleep(time);
+        stopMotors();
+    }
+
+    public void turnLeft(double power, long time) {
+        frontLeftDrive.setPower(-power);
+        frontRightDrive.setPower(power);
+        backLeftDrive.setPower(-power);
+        backRightDrive.setPower(power);
+        sleep(time);
+        stopMotors();
+    }
+
+    public void strafeRight(double power, long time) {
+        frontLeftDrive.setPower(-power);
+        frontRightDrive.setPower(power);
+        backLeftDrive.setPower(power);
+        backRightDrive.setPower(-power);
+        sleep(time);
+        stopMotors();
+    }
+
+    public void strafeLeft(double power, long time) {
+        frontLeftDrive.setPower(power);
+        frontRightDrive.setPower(-power);
+        backLeftDrive.setPower(-power);
+        backRightDrive.setPower(power);
+        sleep(time);
+        stopMotors();
+    }
+    //public void highBucket()
+
+    public void stopMotors() {
+        frontLeftDrive.setPower(0);
+        frontRightDrive.setPower(0);
+        backRightDrive.setPower(0);
+        backLeftDrive.setPower(0);
+    }
+
 }
+
+    //public void slideToHighBasket() {
+       //     slide.setTargetPosition(2500);
+         //   slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+     //   }
+
+
+   // }
+
+
+

@@ -35,9 +35,9 @@ public class Config {
     // Slide
 
     double slideMinimumPosition = 0;
-    double slideMaximumPosition = 1200;
+    double slideMaximumPosition = 1300;
 
-    double slideMaximumPositionHigh = 2500;
+    double slideMaximumPositionHigh = 2950;
 
     double slideMaximumSpecimen = 1400;
 
